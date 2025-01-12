@@ -1,0 +1,34 @@
+<mat-toolbar color="accent">
+    <!-- Contenedor para el título y menú -->
+    <div class="menu-container">
+      <!-- Título -->
+      <span class="title" routerLink="">Random Forest Predicciones</span>
+  
+      <!-- Menú de navegación -->
+      <div class="menu">
+        <ng-container >
+          <button mat-button routerLink="/predicionNewSample">Generar Prediccion</button>
+          <button mat-button routerLink="/historialPredicciones">Historial Predicciones</button>
+        </ng-container>
+      </div>
+    </div>
+  
+    <!-- Espaciador para empujar el botón de logout -->
+    <span class="spacer"></span>
+  
+    <!-- Botón de Logout -->
+     <!--
+    <button
+      mat-flat-button
+      color="primary"
+      class="logout-btn"
+      aria-label="Cerrar sesión"
+    >
+      Salir
+    </button>-->
+  </mat-toolbar>
+  
+  <!--Contenido Dinamico-->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
