@@ -1,1 +1,155 @@
-<p>prediccion works!</p>
+<div class="container">
+  <h1>Formulario de Predicción</h1>
+  <form [formGroup]="predictForm" (ngSubmit)="onSubmit()">
+    <div class="grid">
+      <div class="grid-item">
+        <label for="Administrative">Administrative</label>
+        <input type="number" id="Administrative" formControlName="Administrative" />
+        <div *ngIf="predictForm.get('Administrative')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Administrative_Duration">Administrative Duration</label>
+        <input type="number" id="Administrative_Duration" formControlName="Administrative_Duration" />
+        <div *ngIf="predictForm.get('Administrative_Duration')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Informational">Informational</label>
+        <input type="number" id="Informational" formControlName="Informational" />
+        <div *ngIf="predictForm.get('Informational')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Informational_Duration">Informational Duration</label>
+        <input type="number" id="Informational_Duration" formControlName="Informational_Duration" />
+        <div *ngIf="predictForm.get('Informational_Duration')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="ProductRelated">Product Related</label>
+        <input type="number" id="ProductRelated" formControlName="ProductRelated" />
+        <div *ngIf="predictForm.get('ProductRelated')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="ProductRelated_Duration">Product Related Duration</label>
+        <input type="number" id="ProductRelated_Duration" formControlName="ProductRelated_Duration" />
+        <div *ngIf="predictForm.get('ProductRelated_Duration')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="BounceRates">Bounce Rates</label>
+        <input type="number" id="BounceRates" formControlName="BounceRates" />
+        <div *ngIf="predictForm.get('BounceRates')?.invalid">
+          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="ExitRates">Exit Rates</label>
+        <input type="number" id="ExitRates" formControlName="ExitRates" />
+        <div *ngIf="predictForm.get('ExitRates')?.invalid">
+          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="PageValues">Page Values</label>
+        <input type="number" id="PageValues" formControlName="PageValues" />
+        <div *ngIf="predictForm.get('PageValues')?.invalid">
+          <small class="error">Campo requerido (≥ 0)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="SpecialDay">Special Day</label>
+        <input type="number" id="SpecialDay" formControlName="SpecialDay" />
+        <div *ngIf="predictForm.get('SpecialDay')?.invalid">
+          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Month">Month</label>
+        <select formControlName="Month" id="Month">
+          <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+        </select>
+        <div *ngIf="predictForm.get('Month')?.invalid">
+          <small class="error">Selección requerida</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="OperatingSystems">Operating Systems</label>
+        <input type="number" id="OperatingSystems" formControlName="OperatingSystems" />
+        <div *ngIf="predictForm.get('OperatingSystems')?.invalid">
+          <small class="error">Campo requerido (≥ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Browser">Browser</label>
+        <input type="number" id="Browser" formControlName="Browser" />
+        <div *ngIf="predictForm.get('Browser')?.invalid">
+          <small class="error">Campo requerido (≥ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Region">Region</label>
+        <input type="number" id="Region" formControlName="Region" />
+        <div *ngIf="predictForm.get('Region')?.invalid">
+          <small class="error">Campo requerido (≥ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="TrafficType">Traffic Type</label>
+        <input type="number" id="TrafficType" formControlName="TrafficType" />
+        <div *ngIf="predictForm.get('TrafficType')?.invalid">
+          <small class="error">Campo requerido (≥ 1)</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="VisitorType">Visitor Type</label>
+        <select formControlName="VisitorType" id="VisitorType">
+          <option value="Returning_Visitor">Returning Visitor</option>
+          <option value="New_Visitor">New Visitor</option>
+        </select>
+        <div *ngIf="predictForm.get('VisitorType')?.invalid">
+          <small class="error">Selección requerida</small>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <label for="Weekend">Weekend</label>
+        <input type="number" id="Weekend" formControlName="Weekend" />
+        <div *ngIf="predictForm.get('Weekend')?.invalid">
+          <small class="error">Campo requerido (0 o 1)</small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="predictForm.invalid">Enviar</button>
+  </form>
+
+  <div class="result" *ngIf="result">
+    <h2>Resultado:</h2>
+    <p>Predicción: {{ result.prediction }}</p>
+    <p>Probabilidad: {{ result.probability | json }}</p>
+  </div>
+</div>
