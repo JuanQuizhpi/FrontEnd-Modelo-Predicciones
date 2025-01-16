@@ -1,155 +1,266 @@
 <div class="container">
   <h1>Formulario de Predicción</h1>
-  <form [formGroup]="predictForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="predictForm">
     <div class="grid">
-      <div class="grid-item">
-        <label for="Administrative">Administrative</label>
-        <input type="number" id="Administrative" formControlName="Administrative" />
-        <div *ngIf="predictForm.get('Administrative')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
 
-      <div class="grid-item">
-        <label for="Administrative_Duration">Administrative Duration</label>
-        <input type="number" id="Administrative_Duration" formControlName="Administrative_Duration" />
-        <div *ngIf="predictForm.get('Administrative_Duration')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Campo Administrative -->
+      <mat-form-field appearance="fill">
+        <mat-label>Administrative</mat-label>
+        <input matInput formControlName="Administrative" type="number" min="0" max="26" required />
+        <mat-error *ngIf="predictForm.get('Administrative')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Administrative')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Administrative')?.hasError('max')">
+          El valor debe ser menor o igual a 26.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="Informational">Informational</label>
-        <input type="number" id="Informational" formControlName="Informational" />
-        <div *ngIf="predictForm.get('Informational')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Campo Administrative_Duration -->
+      <mat-form-field appearance="fill">
+        <mat-label>Administrative Duration</mat-label>
+        <input matInput formControlName="Administrative_Duration" type="number" min="0" max="5000" required />
+        <mat-error *ngIf="predictForm.get('Administrative_Duration')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Administrative_Duration')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Administrative_Duration')?.hasError('max')">
+          El valor debe ser menor o igual a 5000.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="Informational_Duration">Informational Duration</label>
-        <input type="number" id="Informational_Duration" formControlName="Informational_Duration" />
-        <div *ngIf="predictForm.get('Informational_Duration')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Campo Informational -->
+      <mat-form-field appearance="fill">
+        <mat-label>Informational</mat-label>
+        <input matInput formControlName="Informational" type="number" min="0" max="15" required />
+        <mat-error *ngIf="predictForm.get('Informational')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Informational')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Informational')?.hasError('max')">
+          El valor debe ser menor o igual a 15.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="ProductRelated">Product Related</label>
-        <input type="number" id="ProductRelated" formControlName="ProductRelated" />
-        <div *ngIf="predictForm.get('ProductRelated')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Campo Informational_Duration -->
+      <mat-form-field appearance="fill">
+        <mat-label>Informational Duration</mat-label>
+        <input matInput formControlName="Informational_Duration" type="number" min="0" max="5000" required />
+        <mat-error *ngIf="predictForm.get('Informational_Duration')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Informational_Duration')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('Informational_Duration')?.hasError('max')">
+          El valor debe ser menor o igual a 5000.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="ProductRelated_Duration">Product Related Duration</label>
-        <input type="number" id="ProductRelated_Duration" formControlName="ProductRelated_Duration" />
-        <div *ngIf="predictForm.get('ProductRelated_Duration')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Campo ProductRelated -->
+      <mat-form-field appearance="fill">
+        <mat-label>Product Related</mat-label>
+        <input matInput formControlName="ProductRelated" type="number" min="0" max="200" required />
+        <mat-error *ngIf="predictForm.get('ProductRelated')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ProductRelated')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ProductRelated')?.hasError('max')">
+          El valor debe ser menor o igual a 200.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="BounceRates">Bounce Rates</label>
-        <input type="number" id="BounceRates" formControlName="BounceRates" />
-        <div *ngIf="predictForm.get('BounceRates')?.invalid">
-          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
-        </div>
-      </div>
+      <!-- Campo ProductRelated_Duration -->
+      <mat-form-field appearance="fill">
+        <mat-label>Product Related Duration</mat-label>
+        <input matInput formControlName="ProductRelated_Duration" type="number" min="0" max="5000" required />
+        <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('max')">
+          El valor debe ser menor o igual a 5000.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="ExitRates">Exit Rates</label>
-        <input type="number" id="ExitRates" formControlName="ExitRates" />
-        <div *ngIf="predictForm.get('ExitRates')?.invalid">
-          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
-        </div>
-      </div>
+      <!-- Campo BounceRates -->
+      <mat-form-field appearance="fill">
+        <mat-label>Bounce Rates</mat-label>
+        <input matInput formControlName="BounceRates" type="number" min="0" max="100" step="10" required />
+        <mat-error *ngIf="predictForm.get('BounceRates')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('BounceRates')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('BounceRates')?.hasError('max')">
+          El valor debe ser menor o igual a 100.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="PageValues">Page Values</label>
-        <input type="number" id="PageValues" formControlName="PageValues" />
-        <div *ngIf="predictForm.get('PageValues')?.invalid">
-          <small class="error">Campo requerido (≥ 0)</small>
-        </div>
-      </div>
+      <!-- Exit Rates -->
+      <mat-form-field appearance="fill">
+        <mat-label>Exit Rates</mat-label>
+        <input matInput formControlName="ExitRates" type="number" min="0" max="100" step="10" required />
+        <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('max')">
+          El valor debe ser menor o igual a 100.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="SpecialDay">Special Day</label>
-        <input type="number" id="SpecialDay" formControlName="SpecialDay" />
-        <div *ngIf="predictForm.get('SpecialDay')?.invalid">
-          <small class="error">Campo requerido (≥ 0, ≤ 1)</small>
-        </div>
-      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Page Values</mat-label>
+        <input matInput formControlName="PageValues" type="number" min="0" max="100" step="10" required />
+        <mat-error *ngIf="predictForm.get('PageValues')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('PageValues')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('PageValues')?.hasError('max')">
+          El valor debe ser menor o igual a 100.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="Month">Month</label>
-        <select formControlName="Month" id="Month">
-          <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+      <mat-form-field appearance="fill">
+        <mat-label>Special Day</mat-label>
+        <input matInput formControlName="SpecialDay" type="number" min="0" max="100" step="10" required />
+        <mat-error *ngIf="predictForm.get('SpecialDay')?.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('SpecialDay')?.hasError('min')">
+          El valor debe ser mayor o igual a 0.
+        </mat-error>
+        <mat-error *ngIf="predictForm.get('SpecialDay')?.hasError('max')">
+          El valor debe ser menor o igual a 100.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mes</mat-label>
+        <select matNativeControl formControlName="Month" required>
+          <option *ngFor="let month of monthsInSpanish" [value]="monthInEnglish[month]">{{ month }}</option>
         </select>
-        <div *ngIf="predictForm.get('Month')?.invalid">
-          <small class="error">Selección requerida</small>
-        </div>
-      </div>
+        <mat-error *ngIf="predictForm.get('Month')?.hasError('required')">
+          Selección requerida.
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="OperatingSystems">Operating Systems</label>
-        <input type="number" id="OperatingSystems" formControlName="OperatingSystems" />
-        <div *ngIf="predictForm.get('OperatingSystems')?.invalid">
-          <small class="error">Campo requerido (≥ 1)</small>
-        </div>
-      </div>
-
-      <div class="grid-item">
-        <label for="Browser">Browser</label>
-        <input type="number" id="Browser" formControlName="Browser" />
-        <div *ngIf="predictForm.get('Browser')?.invalid">
-          <small class="error">Campo requerido (≥ 1)</small>
-        </div>
-      </div>
-
-      <div class="grid-item">
-        <label for="Region">Region</label>
-        <input type="number" id="Region" formControlName="Region" />
-        <div *ngIf="predictForm.get('Region')?.invalid">
-          <small class="error">Campo requerido (≥ 1)</small>
-        </div>
-      </div>
-
-      <div class="grid-item">
-        <label for="TrafficType">Traffic Type</label>
-        <input type="number" id="TrafficType" formControlName="TrafficType" />
-        <div *ngIf="predictForm.get('TrafficType')?.invalid">
-          <small class="error">Campo requerido (≥ 1)</small>
-        </div>
-      </div>
-
-      <div class="grid-item">
-        <label for="VisitorType">Visitor Type</label>
-        <select formControlName="VisitorType" id="VisitorType">
-          <option value="Returning_Visitor">Returning Visitor</option>
-          <option value="New_Visitor">New Visitor</option>
+      <mat-form-field appearance="fill">
+        <mat-label>Operating Systems</mat-label>
+        <select matNativeControl formControlName="OperatingSystems" id="OperatingSystems">
+          <option [value]="2">Windows</option>
+          <option [value]="1">Android</option>
+          <option [value]="3">iOS</option>
+          <option [value]="4">macOS</option>
+          <option [value]="8">Linux</option>
+          <option [value]="6">Chrome OS</option>
+          <option [value]="7">HarmonyOS</option>
+          <option [value]="5">Otros sistemas</option>
         </select>
-        <div *ngIf="predictForm.get('VisitorType')?.invalid">
-          <small class="error">Selección requerida</small>
-        </div>
-      </div>
+        <mat-error *ngIf="predictForm.get('OperatingSystems')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
 
-      <div class="grid-item">
-        <label for="Weekend">Weekend</label>
-        <input type="number" id="Weekend" formControlName="Weekend" />
-        <div *ngIf="predictForm.get('Weekend')?.invalid">
-          <small class="error">Campo requerido (0 o 1)</small>
-        </div>
-      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Browser</mat-label>
+        <select matNativeControl formControlName="Browser" id="Browser">
+          <option [value]="2">Google Chrome</option>
+          <option [value]="1">Safari</option>
+          <option [value]="4">Microsoft Edge</option>
+          <option [value]="5">Samsung Internet</option>
+          <option [value]="6">Firefox</option>
+          <option [value]="8">Opera</option>
+          <option [value]="7">Vivaldi</option>
+          <option [value]="10">Brave</option>
+          <option [value]="3">UC Browser</option>
+          <option [value]="13">Maxthon</option>
+          <option [value]="12">Tor Browser</option>
+          <option [value]="11">SRWare Iron</option>
+          <option [value]="9">Midori</option>
+        </select>
+        <mat-error *ngIf="predictForm.get('Browser')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Region</mat-label>
+        <select matNativeControl formControlName="Region" id="Region">
+          <option [value]="1">Asia-Pacífico</option>
+          <option [value]="3">América del Norte</option>
+          <option [value]="4">Europa</option>
+          <option [value]="2">América Latina</option>
+          <option [value]="6">Oriente Medio</option>
+          <option [value]="7">África</option>
+          <option [value]="9">Oceanía</option>
+          <option [value]="8">Sudeste Asiático</option>
+          <option [value]="5">Europa del Este</option>
+        </select>
+        <mat-error *ngIf="predictForm.get('Region')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Traffic Type</mat-label>
+        <select matNativeControl formControlName="TrafficType" id="TrafficType">
+          <option [value]="2">Tráfico Orgánico</option>
+          <option [value]="1">Tráfico Directo</option>
+          <option [value]="3">Tráfico de Pago (PPC)</option>
+          <option [value]="4">Tráfico de Referencia</option>
+          <option [value]="13">Tráfico Social</option>
+          <option [value]="10">Tráfico de Email</option>
+          <option [value]="6">Tráfico de Afiliados</option>
+        </select>
+        <mat-error *ngIf="predictForm.get('TrafficType')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de Visitante</mat-label>
+        <select matNativeControl formControlName="VisitorType" id="VisitorType">
+          <option [value]="'Returning_Visitor'">Visitante Frecuente</option>
+          <option [value]="'New_Visitor'">Nuevo Visitante</option>
+          <option [value]="'Other'">Otro</option>
+        </select>
+        <mat-error *ngIf="predictForm.get('VisitorType')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>¿Es fin de semana?</mat-label>
+        <select matNativeControl formControlName="Weekend" id="Weekend">
+          <option [value]="1">Sí</option>
+          <option [value]="0">No</option>
+        </select>
+        <mat-error *ngIf="predictForm.get('Weekend')?.invalid">
+          Selección requerida
+        </mat-error>
+      </mat-form-field>
     </div>
-
-    <button type="submit" [disabled]="predictForm.invalid">Enviar</button>
   </form>
-
-  <div class="result" *ngIf="result">
-    <h2>Resultado:</h2>
-    <p>Predicción: {{ result.prediction }}</p>
-    <p>Probabilidad: {{ result.probability | json }}</p>
-  </div>
+  <!-- Botón para probar la captura de datos -->
+  <button [disabled]="predictForm.invalid || loading" mat-raised-button color="primary" (click)="makePredicionAjustada()">
+    <span *ngIf="!loading">Hacer prediccion</span>
+    <span *ngIf="loading">Cargando...</span>
+  </button>
 </div>

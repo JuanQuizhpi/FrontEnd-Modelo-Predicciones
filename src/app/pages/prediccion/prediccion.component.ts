@@ -19,6 +19,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatError } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider';
+import Swal from 'sweetalert2';
 
 //Interfaz de todas las variables del formulario
 export interface PredictionForm {
@@ -44,52 +47,241 @@ export interface PredictionForm {
 @Component({
   selector: 'app-prediccion',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatButtonModule,MatGridListModule,MatError],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatError,
+    MatCardModule,
+    MatSliderModule,
+  ],
   templateUrl: './prediccion.component.html',
   styleUrl: './prediccion.component.scss',
 })
 export class PrediccionComponent {
   predictForm: FormGroup;
   result: any = null;
-  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  //Variable relacionada a el estado de carga
+  loading: boolean = false;
+  months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
 
+  // Meses en español
+  monthsInSpanish: string[] = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ];
+  // Relación de meses en español con los nombres de los meses en inglés
+  monthInEnglish: { [key: string]: string } = {
+    Enero: 'Jan',
+    Febrero: 'Feb',
+    Marzo: 'Mar',
+    Abril: 'Apr',
+    Mayo: 'May',
+    Junio: 'Jun',
+    Julio: 'Jul',
+    Agosto: 'Aug',
+    Septiembre: 'Sep',
+    Octubre: 'Oct',
+    Noviembre: 'Nov',
+    Diciembre: 'Dec',
+  };
 
   constructor(private fb: FormBuilder, private predictService: PredictService) {
     this.predictForm = this.fb.group({
-      Administrative: [0, [Validators.required, Validators.min(0)]],
-      Administrative_Duration: [0, [Validators.required, Validators.min(0)]],
-      Informational: [0, [Validators.required, Validators.min(0)]],
-      Informational_Duration: [0, [Validators.required, Validators.min(0)]],
-      ProductRelated: [0, [Validators.required, Validators.min(0)]],
-      ProductRelated_Duration: [0, [Validators.required, Validators.min(0)]],
-      BounceRates: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
-      ExitRates: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
-      PageValues: [0, [Validators.required, Validators.min(0)]],
-      SpecialDay: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
-      Month: ['', [Validators.required]],
-      OperatingSystems: [1, [Validators.required, Validators.min(1)]],
-      Browser: [1, [Validators.required, Validators.min(1)]],
-      Region: [1, [Validators.required, Validators.min(1)]],
-      TrafficType: [1, [Validators.required, Validators.min(1)]],
-      VisitorType: ['', [Validators.required]],
+      Administrative: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(26)],
+      ],
+      Administrative_Duration: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(5000)],
+      ],
+      Informational: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(15)],
+      ],
+      Informational_Duration: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(5000)],
+      ],
+      ProductRelated: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(200)],
+      ],
+      ProductRelated_Duration: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(5000)],
+      ],
+      BounceRates: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(100)],
+      ],
+      ExitRates: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(100)],
+      ],
+      PageValues: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(100)],
+      ],
+      SpecialDay: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(100)],
+      ],
+      Month: ['', Validators.required],
+      OperatingSystems: [
+        1,
+        [Validators.required, Validators.min(1), Validators.max(8)],
+      ],
+      Browser: [
+        1,
+        [Validators.required, Validators.min(1), Validators.max(13)],
+      ],
+      Region: [1, [Validators.required, Validators.min(1), Validators.max(9)]],
+      TrafficType: [
+        1,
+        [Validators.required, Validators.min(1), Validators.max(20)],
+      ],
+      VisitorType: ['', Validators.required],
       Weekend: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
     });
   }
 
-  onSubmit(){
-    if(this.predictForm.invalid){
+  onSubmit() {
+    if (this.predictForm.invalid) {
       return;
     }
     //Convertir los valores del formulario a la estructura de la interfaz PredictionForm
     const formData: PredictionForm = this.predictForm.value as PredictionForm;
     this.predictService.makePrediction(formData).subscribe(
-      (response)=>{
+      (response) => {
         this.result = response;
       },
-      (error)=>{
-        console.log('Error realizando la prediccion',error)
+      (error) => {
+        console.log('Error realizando la prediccion', error);
       }
-    )
+    );
+  }
 
+  logCapturedData() {
+    console.log('Captured form data:', this.predictForm.value);
+  }
+
+  logCapturedDatav2() {
+    if (this.predictForm.invalid) {
+      return;
+    }
+
+    // Crear una copia de los datos del formulario
+    const formData = { ...this.predictForm.value };
+
+    // Transformar el campo BounceRates de 10, 20, 30, etc., a 0.1, 0.2, 0.3, etc.
+    formData.BounceRates = formData.BounceRates / 100;
+    formData.ExitRates = formData.ExitRates / 100;
+    formData.SpecialDay = formData.SpecialDay / 100;
+    formData.OperatingSystems = Number(formData.OperatingSystems);
+    formData.Browser = Number(formData.Browser);
+    formData.Region = Number(formData.Region);
+    formData.TrafficType = Number(formData.TrafficType);
+    formData.Weekend = Number(formData.Weekend);
+
+    // Ahora puedes ver los datos capturados y transformados
+    console.log('Datos capturados y transformados: ', formData);
+
+    //Hacemos una prediccion
+    this.predictService.makePrediction(formData).subscribe(
+      (response) => {
+        this.result = response;
+      },
+      (error) => {
+        console.log('Error realizando la prediccion', error);
+      }
+    );
+  }
+
+  makePredicionAjustada() {
+    if (this.predictForm.invalid) {
+      return;
+    }
+
+    // Crear una copia de los datos del formulario
+    const formData = { ...this.predictForm.value };
+
+    // Transformar el campo BounceRates de 10, 20, 30, etc., a 0.1, 0.2, 0.3, etc.
+    formData.BounceRates = formData.BounceRates / 100;
+    formData.ExitRates = formData.ExitRates / 100;
+    formData.SpecialDay = formData.SpecialDay / 100;
+    formData.OperatingSystems = Number(formData.OperatingSystems);
+    formData.Browser = Number(formData.Browser);
+    formData.Region = Number(formData.Region);
+    formData.TrafficType = Number(formData.TrafficType);
+    formData.Weekend = Number(formData.Weekend);
+
+    // Ahora puedes ver los datos capturados y transformados
+    console.log('Datos capturados y transformados: ', formData);
+
+    //Indicador de Carga
+    this.loading = true;
+
+    //Hacemos una prediccion
+    this.predictService.makePrediction(formData).subscribe(
+      (response) => {
+        //this.result = response;
+        this.loading = false;
+        const predictionText =
+          response.prediction === 1
+            ? 'El usuario probablemente realizará una compra.'
+            : 'El usuario probablemente no realizará una compra.';
+
+        const probabilityText = `📊 <strong>Probabilidades:</strong> 
+      <br> ❌ No compra: ${(response.probability[0] * 100).toFixed(2)}%
+      <br> ✅ Compra: ${(response.probability[1] * 100).toFixed(2)}%`;
+
+        Swal.fire({
+          title: '🔍 Predicción realizada',
+          html: `<p><strong>Resultado:</strong> ${predictionText}</p>
+             <p>${probabilityText}</p>`,
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        });
+      },
+      (error) => {
+        this.loading = false;
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema al realizar la predicción. Inténtalo de nuevo.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
+        console.log('Error realizando la prediccion', error);
+      }
+    );
   }
 }
