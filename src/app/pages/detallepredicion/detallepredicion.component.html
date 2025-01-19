@@ -1,1 +1,121 @@
-<p>detallepredicion works!</p>
+<!--
+<h2>Detalles de la Predicción</h2>
+
+<div *ngIf="prediccionData">
+  <p><strong>Datos de Entrada:</strong></p>
+  <pre>{{ prediccionData.input_data | json }}</pre>
+
+  <p><strong>Predicción:</strong> {{ prediccionData.prediction }}</p>
+  <p><strong>Probabilidades:</strong> {{ prediccionData.probability | json }}</p>
+</div>
+
+<div *ngIf="!prediccionData">
+  <p>Cargando detalles...</p>
+</div>-->
+
+<div class="card-container">
+    <!-- Primer div con el mat-card de los datos de entrada -->
+    <div class="card-item">
+        <mat-card class="detalle-card">
+            <mat-card-header>
+                <mat-card-title>📊 Datos de Entrada</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="data-container">
+                    <div class="data-item">
+                        <strong>Páginas Administrativas:</strong> {{ prediccionData?.input_data?.Administrative }}
+                        páginas.
+                    </div>
+                    <div class="data-item">
+                        <strong>Duración Administrativa:</strong> {{ prediccionData?.input_data?.Administrative_Duration
+                        }} horas.
+                    </div>
+                    <div class="data-item">
+                        <strong>Páginas Informativas:</strong> {{ prediccionData?.input_data?.Informational }} páginas.
+                    </div>
+                    <div class="data-item">
+                        <strong>Duración Informativa:</strong> {{ prediccionData?.input_data?.Informational_Duration }}
+                        horas.
+                    </div>
+                    <div class="data-item">
+                        <strong>Páginas de Producto:</strong> {{ prediccionData?.input_data?.ProductRelated }} páginas
+                    </div>
+                    <div class="data-item">
+                        <strong>Duración Producto:</strong> {{ prediccionData?.input_data?.ProductRelated_Duration }}
+                        horas.
+                    </div>
+                    <div class="data-item">
+                        <strong>Tasa de Rebote:</strong> {{ prediccionData?.input_data?.BounceRates*100 | number:'1.0-2'
+                        }}%
+                    </div>
+                    <div class="data-item">
+                        <strong>Tasa de Salida:</strong> {{ prediccionData?.input_data?.ExitRates*100 | number:'1.0-2'
+                        }}%
+                    </div>
+                    <div class="data-item">
+                        <strong>Valor de Página:</strong> {{ prediccionData?.input_data?.PageValues | number:'1.0-2' }}%
+                    </div>
+                    <div class="data-item">
+                        <strong>Día Especial:</strong> {{ prediccionData?.input_data?.SpecialDay*100 | number:'1.0-2'
+                        }}%
+                    </div>
+                    <div class="data-item">
+                        <strong>Mes:</strong> {{ monthMap[prediccionData?.input_data?.Month] ||
+                        prediccionData?.input_data?.Month }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Sistema Operativo:</strong> {{ osMap[prediccionData?.input_data?.OperatingSystems] ||
+                        'Desconocido' }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Navegador:</strong> {{ browserMap[prediccionData?.input_data?.Browser] || 'Desconocido'
+                        }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Región:</strong> {{ regionMap[prediccionData?.input_data?.Region] || 'Desconocido' }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Tipo de Tráfico:</strong> {{ trafficTypeMap[prediccionData?.input_data?.TrafficType] ||
+                        'Desconocido' }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Tipo de Visitante:</strong> {{ visitorTypeMap[prediccionData?.input_data?.VisitorType]
+                        || 'Desconocido' }}
+                    </div>
+                    <div class="data-item">
+                        <strong>Fin de Semana:</strong> {{ prediccionData?.input_data?.Weekend ? 'Sí' : 'No' }}
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- Segundo div con el mat-card para la gráfica -->
+    <div class="card-item">
+        <mat-card class="detalle-card">
+            <mat-card-header>
+                <mat-card-title>📊 Gráfica de Datos</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="chart-container">
+                    <!-- Aquí colocarías el código para la gráfica -->
+                    <div class="data-item" *ngIf="!loading">
+                        <strong>Predicción:</strong> {{ predictionText }}
+                    </div>
+                    <button mat-raised-button color="primary" (click)="createChart()">Grafica</button>
+                    <div class="data-item" *ngIf="!loading">
+                        <strong>Probabilidades:</strong>
+                        <canvas id="probabilityChart"></canvas> <!-- Aquí se muestra la gráfica de pastel -->
+                    </div>
+
+                    <!-- Muestra un mensaje mientras se cargan los datos -->
+                    <div *ngIf="loading">Cargando...</div>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- Puedes agregar más divs para más mat-cards de gráficos o datos -->
+     
+</div>

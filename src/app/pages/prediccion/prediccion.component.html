@@ -261,6 +261,6 @@
   <!-- Botón para probar la captura de datos -->
   <button [disabled]="predictForm.invalid || loading" mat-raised-button color="primary" (click)="makePredicionAjustada()">
     <span *ngIf="!loading">Hacer prediccion</span>
-    <span *ngIf="loading">Cargando...</span>
+    <span *ngIf="loading">Realizando la predicción...</span>
   </button>
 </div>

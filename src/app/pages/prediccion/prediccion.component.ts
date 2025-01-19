@@ -22,6 +22,7 @@ import { MatError } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 //Interfaz de todas las variables del formulario
 export interface PredictionForm {
@@ -113,7 +114,11 @@ export class PrediccionComponent {
     Diciembre: 'Dec',
   };
 
-  constructor(private fb: FormBuilder, private predictService: PredictService) {
+  constructor(
+    private fb: FormBuilder,
+    private predictService: PredictService,
+    private router: Router
+  ) {
     this.predictForm = this.fb.group({
       Administrative: [
         0,
@@ -269,7 +274,15 @@ export class PrediccionComponent {
           html: `<p><strong>Resultado:</strong> ${predictionText}</p>
              <p>${probabilityText}</p>`,
           icon: 'success',
+          showCancelButton: true, // Agregar botón extra
           confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Ver detalles',
+        }).then((result) => {
+          if (result.isDismissed) {
+            // Si el usuario hace clic en "Ver detalles"
+            const predictionId = response.predictionId;
+            this.router.navigate(['/detallePrediccion', predictionId]);
+          }
         });
       },
       (error) => {

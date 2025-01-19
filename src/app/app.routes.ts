@@ -12,7 +12,7 @@ export const routes: Routes = [
     children: [
       { path: 'predicionNewSample', component: PrediccionComponent},
       { path: 'historialPredicciones', component: HistorialComponent },
-      { path :'detallePrediccion',component:DetallepredicionComponent},
+      { path :'detallePrediccion/:id',component:DetallepredicionComponent},
       {path:'',component:PresentacionComponent}
     ],
   },

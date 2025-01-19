@@ -1,0 +1,28 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Espaciado entre los divs */
+  }
+  
+  .card-item {
+    width: 48%; /* Casi la mitad del ancho */
+    margin-bottom: 20px; /* Espaciado entre filas */
+  }
+  
+  .data-container {
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+  
+  .data-item {
+    width: 50%; /* Toma la mitad del ancho */
+    padding: 10px;
+    box-sizing: border-box;
+    
+  }
+  
+  .chart-container {
+    /* Estilos para la sección de gráficos */
+  }
+  
