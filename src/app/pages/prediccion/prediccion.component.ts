@@ -122,7 +122,7 @@ export class PrediccionComponent {
     this.predictForm = this.fb.group({
       Administrative: [
         0,
-        [Validators.required, Validators.min(0), Validators.max(26)],
+        [Validators.required, Validators.min(0), Validators.max(100)],
       ],
       Administrative_Duration: [
         0,
@@ -130,7 +130,7 @@ export class PrediccionComponent {
       ],
       Informational: [
         0,
-        [Validators.required, Validators.min(0), Validators.max(15)],
+        [Validators.required, Validators.min(0), Validators.max(100)],
       ],
       Informational_Duration: [
         0,
@@ -157,21 +157,21 @@ export class PrediccionComponent {
         [Validators.required, Validators.min(0), Validators.max(100)],
       ],
       SpecialDay: [
-        0,
+        0.1,
         [Validators.required, Validators.min(0), Validators.max(100)],
       ],
       Month: ['', Validators.required],
       OperatingSystems: [
-        1,
+        2,
         [Validators.required, Validators.min(1), Validators.max(8)],
       ],
       Browser: [
-        1,
+        2,
         [Validators.required, Validators.min(1), Validators.max(13)],
       ],
       Region: [1, [Validators.required, Validators.min(1), Validators.max(9)]],
       TrafficType: [
-        1,
+        2,
         [Validators.required, Validators.min(1), Validators.max(20)],
       ],
       VisitorType: ['', Validators.required],
@@ -199,38 +199,6 @@ export class PrediccionComponent {
     console.log('Captured form data:', this.predictForm.value);
   }
 
-  logCapturedDatav2() {
-    if (this.predictForm.invalid) {
-      return;
-    }
-
-    // Crear una copia de los datos del formulario
-    const formData = { ...this.predictForm.value };
-
-    // Transformar el campo BounceRates de 10, 20, 30, etc., a 0.1, 0.2, 0.3, etc.
-    formData.BounceRates = formData.BounceRates / 100;
-    formData.ExitRates = formData.ExitRates / 100;
-    formData.SpecialDay = formData.SpecialDay / 100;
-    formData.OperatingSystems = Number(formData.OperatingSystems);
-    formData.Browser = Number(formData.Browser);
-    formData.Region = Number(formData.Region);
-    formData.TrafficType = Number(formData.TrafficType);
-    formData.Weekend = Number(formData.Weekend);
-
-    // Ahora puedes ver los datos capturados y transformados
-    console.log('Datos capturados y transformados: ', formData);
-
-    //Hacemos una prediccion
-    this.predictService.makePrediction(formData).subscribe(
-      (response) => {
-        this.result = response;
-      },
-      (error) => {
-        console.log('Error realizando la prediccion', error);
-      }
-    );
-  }
-
   makePredicionAjustada() {
     if (this.predictForm.invalid) {
       return;
@@ -242,11 +210,6 @@ export class PrediccionComponent {
     // Transformar el campo BounceRates de 10, 20, 30, etc., a 0.1, 0.2, 0.3, etc.
     formData.BounceRates = formData.BounceRates / 100;
     formData.ExitRates = formData.ExitRates / 100;
-    formData.SpecialDay = formData.SpecialDay / 100;
-    formData.OperatingSystems = Number(formData.OperatingSystems);
-    formData.Browser = Number(formData.Browser);
-    formData.Region = Number(formData.Region);
-    formData.TrafficType = Number(formData.TrafficType);
     formData.Weekend = Number(formData.Weekend);
 
     // Ahora puedes ver los datos capturados y transformados

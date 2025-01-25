@@ -1,52 +1,52 @@
 .container {
-  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
+.form-card {
+
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Alinear todo a la izquierda */
+}
+
 h1 {
-  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: center; /* Mantener el título centrado */
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.grid-item {
+.form-item {
   display: flex;
   flex-direction: column;
 }
 
-label {
+.form-label {
   font-weight: bold;
   margin-bottom: 8px;
+  font-size: 1rem;
 }
 
-input, select {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.form-field {
+  width: 100%;
+}
+
+.large-input input, .large-input select {
+  font-size: 1.2rem;
+  padding: 10px;
 }
 
 button {
-  width: 100%;
+  margin-top: 20px;
+  width: 100%; /* Botón ancho */
+  font-size: 1rem;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button:disabled {
-  background-color: #ccc;
-}
-
-.error {
-  color: red;
-  font-size: 12px;
 }

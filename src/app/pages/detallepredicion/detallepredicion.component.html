@@ -1,18 +1,3 @@
-<!--
-<h2>Detalles de la Predicción</h2>
-
-<div *ngIf="prediccionData">
-  <p><strong>Datos de Entrada:</strong></p>
-  <pre>{{ prediccionData.input_data | json }}</pre>
-
-  <p><strong>Predicción:</strong> {{ prediccionData.prediction }}</p>
-  <p><strong>Probabilidades:</strong> {{ prediccionData.probability | json }}</p>
-</div>
-
-<div *ngIf="!prediccionData">
-  <p>Cargando detalles...</p>
-</div>-->
-
 <div class="card-container">
     <!-- Primer div con el mat-card de los datos de entrada -->
     <div class="card-item">
@@ -55,28 +40,10 @@
                     <div class="data-item">
                         <strong>Valor de Página:</strong> {{ prediccionData?.input_data?.PageValues | number:'1.0-2' }}%
                     </div>
-                    <div class="data-item">
-                        <strong>Día Especial:</strong> {{ prediccionData?.input_data?.SpecialDay*100 | number:'1.0-2'
-                        }}%
-                    </div>
+
                     <div class="data-item">
                         <strong>Mes:</strong> {{ monthMap[prediccionData?.input_data?.Month] ||
                         prediccionData?.input_data?.Month }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Sistema Operativo:</strong> {{ osMap[prediccionData?.input_data?.OperatingSystems] ||
-                        'Desconocido' }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Navegador:</strong> {{ browserMap[prediccionData?.input_data?.Browser] || 'Desconocido'
-                        }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Región:</strong> {{ regionMap[prediccionData?.input_data?.Region] || 'Desconocido' }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Tipo de Tráfico:</strong> {{ trafficTypeMap[prediccionData?.input_data?.TrafficType] ||
-                        'Desconocido' }}
                     </div>
                     <div class="data-item">
                         <strong>Tipo de Visitante:</strong> {{ visitorTypeMap[prediccionData?.input_data?.VisitorType]
@@ -117,5 +84,5 @@
     </div>
 
     <!-- Puedes agregar más divs para más mat-cards de gráficos o datos -->
-     
+
 </div>
