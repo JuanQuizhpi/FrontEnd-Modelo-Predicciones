@@ -6,6 +6,7 @@
 
 .form-card {
 
+  background-color:  #1e1e1e;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -49,4 +50,26 @@ button {
   width: 100%; /* Botón ancho */
   font-size: 1rem;
   padding: 10px;
+}
+
+:host {
+  background-color: #121212;
+  color: #e0e0e0;
+  display: block;
+  padding: 20px;
+}
+
+// Encabezado con fondo gris
+.page-header {
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
 }

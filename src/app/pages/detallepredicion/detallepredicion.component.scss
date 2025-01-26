@@ -1,19 +1,23 @@
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Espaciado entre los divs */
-  }
-  
-  .card-item {
-    width: 48%; /* Casi la mitad del ancho */
-    margin-bottom: 20px; /* Espaciado entre filas */
-  }
-  
-  .data-container {
-    display: flex;
-    flex-wrap: wrap;
-    
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacio entre las tarjetas */
+  justify-content: center;
+}
+
+.card-item {
+  flex: 1 1 calc(50% - 16px); /* Cada tarjeta ocupa el 50% menos el espacio entre ellas */
+  max-width: 600px; /* Puedes ajustar el máximo según tu diseño */
+}
+
+.detalle-card {
+  height: 500px; /* Ajusta la altura según lo que necesites */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
   
   .data-item {
     width: 50%; /* Toma la mitad del ancho */
@@ -22,7 +26,17 @@
     
   }
   
-  .chart-container {
-    /* Estilos para la sección de gráficos */
-  }
-  
+// Encabezado con fondo gris
+.page-header {
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+}

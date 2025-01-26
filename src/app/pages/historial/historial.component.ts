@@ -5,17 +5,18 @@ import { error } from 'console';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-historial',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule,MatIconModule],
   templateUrl: './historial.component.html',
   styleUrl: './historial.component.scss',
 })
 export class HistorialComponent implements OnInit {
   displayedColumns: string[] = [
-    'id',
+    
     'prediccion',
     'probabilidadCompra',
     'probabilidadNoCompra',
