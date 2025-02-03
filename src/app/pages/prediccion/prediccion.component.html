@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class="page-title">Formulario de Predicción</h1>
+  <h1 class="page-title">Formulario para predecir si se realizará una compra</h1>
 </div>
 
 <div class="container">
@@ -9,124 +9,124 @@
       <div class="form-column">
         <!-- Campo Administrative -->
         <div class="form-item">
-          <label class="form-label">¿Cuántas páginas administrativas?</label>
+          <label class="form-label">¿Cuántas páginas administrativas fueron visitadas?</label>
           <mat-form-field appearance="fill" class="form-field">
-            <input matInput formControlName="Administrative" type="number" min="0" max="26" required />
+            <input matInput formControlName="Administrative" type="number" min="0" max="100" required />
             <mat-error *ngIf="predictForm.get('Administrative')?.invalid">
-              Debes ingresar un número entre 0 y 26.
+              Debes ingresar un número entre 0 y 100 páginas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo Administrative_Duration -->
         <div class="form-item">
-          <label class="form-label">¿Duración en páginas administrativas (en segundos)?</label>
+          <label class="form-label">¿Cuánto tiempo se empleó en las páginas administrativas (horas)?</label>
           <mat-form-field appearance="fill" class="form-field">
             <input matInput formControlName="Administrative_Duration" type="number" min="0" max="5000" required />
             <mat-error *ngIf="predictForm.get('Administrative_Duration')?.invalid">
-              Debes ingresar un número entre 0 y 5000.
+              Debes ingresar un número entre 0 y 5000 horas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo Informational -->
         <div class="form-item">
-          <label class="form-label">¿Cuántas páginas informativas?</label>
+          <label class="form-label">¿Cuántas páginas de carácter informativo fueron visitadas?</label>
           <mat-form-field appearance="fill" class="form-field">
-            <input matInput formControlName="Informational" type="number" min="0" max="15" required />
+            <input matInput formControlName="Informational" type="number" min="0" max="100" required />
             <mat-error *ngIf="predictForm.get('Informational')?.invalid">
-              Debes ingresar un número entre 0 y 15.
+              Debes ingresar un número entre 0 y 100 páginas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo Informational_Duration -->
         <div class="form-item">
-          <label class="form-label">¿Duración en páginas informativas (en segundos)?</label>
+          <label class="form-label">¿Cuánto tiempo se empleó en la visita de esas páginas informativas (horas)?</label>
           <mat-form-field appearance="fill" class="form-field">
             <input matInput formControlName="Informational_Duration" type="number" min="0" max="5000" required />
             <mat-error *ngIf="predictForm.get('Informational_Duration')?.invalid">
-              Debes ingresar un número entre 0 y 5000.
+              Debes ingresar un número entre 0 y 5000 horas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo ProductRelated -->
         <div class="form-item">
-          <label class="form-label">¿Cuántas páginas relacionadas con productos?</label>
+          <label class="form-label">¿Cuántas páginas de productos se visitaron?</label>
           <mat-form-field appearance="fill" class="form-field">
             <input matInput formControlName="ProductRelated" type="number" min="0" max="200" required />
             <mat-error *ngIf="predictForm.get('ProductRelated')?.invalid">
-              Debes ingresar un número entre 0 y 200.
+              Debes ingresar un número entre 0 y 200 páginas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo ProductRelated_Duration -->
         <div class="form-item">
-          <label class="form-label">¿Duración en páginas relacionadas con productos?</label>
+          <label class="form-label">¿Cuánto tiempo se empleó en la visita de esas páginas de productos?</label>
           <mat-form-field appearance="fill">
             <input matInput formControlName="ProductRelated_Duration" type="number" min="0" max="5000" required />
             <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('required')">
               Este campo es requerido.
             </mat-error>
             <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('min')">
-              El valor debe ser mayor o igual a 0.
+              El valor debe ser mayor o igual a 0 horas.
             </mat-error>
             <mat-error *ngIf="predictForm.get('ProductRelated_Duration')?.hasError('max')">
-              El valor debe ser menor o igual a 5000.
+              El valor debe ser menor o igual a 5000 horas.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo BounceRates -->
         <div class="form-item">
-          <label class="form-label">¿Tasa de rebote (%)?</label>
+          <label class="form-label">¿Cuál es el porcentaje de usuarios que abandonan la página sin interactuar?</label>
           <mat-form-field appearance="fill" class="form-field">
-            <input matInput formControlName="BounceRates" type="number" min="0" max="100" required />
+            <input matInput formControlName="BounceRates" type="number" min="0" max="100" step="5" required />
             <mat-error *ngIf="predictForm.get('BounceRates')?.invalid">
-              Debes ingresar un número entre 0 y 100.
+              Debes ingresar un número entre 0 y 100 %.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Exit Rates -->
         <div class="form-item">
-          <label class="form-label">¿Tasa de Salidas(%)?</label>
+          <label class="form-label">¿Cuál es el porcentaje de usuarios que abandonan el sitio desde una página específica?</label>
           <mat-form-field appearance="fill">
-            <input matInput formControlName="ExitRates" type="number" min="0" max="100" step="10" required />
+            <input matInput formControlName="ExitRates" type="number" min="0" max="100" step="5" required />
             <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('required')">
               Este campo es requerido.
             </mat-error>
             <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('min')">
-              El valor debe ser mayor o igual a 0.
+              El valor debe ser mayor o igual a 0 %.
             </mat-error>
             <mat-error *ngIf="predictForm.get('ExitRates')?.hasError('max')">
-              El valor debe ser menor o igual a 100.
+              El valor debe ser menor o igual a 100 %.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo Page Values -->
         <div class="form-item">
-          <label class="form-label">¿Valoración de páginas (%)?</label>
+          <label class="form-label">¿Cuál es la valoración promedio de cada página en términos de su importancia o contribución al objetivo del sitio web?</label>
           <mat-form-field appearance="fill">
-            <input matInput formControlName="PageValues" type="number" min="0" max="100" step="10" required />
+            <input matInput formControlName="PageValues" type="number" min="0" max="100" step="5" required />
             <mat-error *ngIf="predictForm.get('PageValues')?.hasError('required')">
               Este campo es requerido.
             </mat-error>
             <mat-error *ngIf="predictForm.get('PageValues')?.hasError('min')">
-              El valor debe ser mayor o igual a 0.
+              El valor debe ser mayor o igual a 0 %.
             </mat-error>
             <mat-error *ngIf="predictForm.get('PageValues')?.hasError('max')">
-              El valor debe ser menor o igual a 100.
+              El valor debe ser menor o igual a 100 %.
             </mat-error>
           </mat-form-field>
         </div>
 
         <!-- Campo Mes -->
         <div class="form-item">
-          <label class="form-label">¿Mes del año?</label>
+          <label class="form-label">¿En qué mes del año se experimenta la mayor cantidad de visitas?</label>
           <mat-form-field appearance="fill" class="form-field">
             <select matNativeControl formControlName="Month" required>
               <option *ngFor="let month of monthsInSpanish" [value]="monthInEnglish[month]">{{ month }}</option>
@@ -139,7 +139,7 @@
 
          <!-- Campo Weekend -->
          <div class="form-item">
-          <label class="form-label">¿Compra realizada en fin de semana?</label>
+          <label class="form-label">¿Las compras en su sitio web son más frecuentes durante los fines de semana?</label>
           <mat-form-field appearance="fill">
             <select matNativeControl formControlName="Weekend" id="Weekend">
               <option [value]="1">Sí</option>
@@ -154,7 +154,7 @@
 
         <!-- Campo Tipo de Visitante -->
         <div class="form-item">
-          <label class="form-label">¿Tipo de visitante?</label>
+          <label class="form-label">¿Cuál de los siguientes tipos de visitantes describe mejor a los usuarios de su sitio web?</label>
           <mat-form-field appearance="fill" class="form-field">
             <select matNativeControl formControlName="VisitorType" required>
               <option value="Returning_Visitor">Visitante Frecuente</option>
@@ -170,7 +170,7 @@
     </form>
     <button [disabled]="predictForm.invalid || loading" mat-raised-button color="primary"
       (click)="makePredicionAjustada()">
-      <span *ngIf="!loading">Hacer predicción</span>
+      <span *ngIf="!loading">Generar predicción</span>
       <span *ngIf="loading">Realizando la predicción...</span>
     </button>
   </mat-card>

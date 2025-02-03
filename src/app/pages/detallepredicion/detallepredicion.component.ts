@@ -8,11 +8,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import { Chart,registerables } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import { MatButtonModule } from '@angular/material/button';
 
 Chart.register(...registerables);
-
 
 @Component({
   selector: 'app-detallepredicion',
@@ -23,7 +22,8 @@ Chart.register(...registerables);
     MatGridListModule,
     MatCardModule,
     MatListModule,
-    CommonModule,MatButtonModule
+    CommonModule,
+    MatButtonModule,
   ],
   templateUrl: './detallepredicion.component.html',
   styleUrl: './detallepredicion.component.scss',
@@ -38,8 +38,7 @@ export class DetallepredicionComponent implements OnInit {
   //public chart: any;
   chart!: Chart;
   //Constante de Grafica
-  probaRes:any;
-  
+  probaRes: any;
 
   monthMap: { [key: string]: string } = {
     Jan: 'Enero',
@@ -134,8 +133,8 @@ export class DetallepredicionComponent implements OnInit {
             //Establecemos el texto en la prediccion
             this.predictionText =
               prediction === 1
-                ? 'El usuario probablemente realizará una compra.'
-                : 'El usuario probablemente no realizará una compra.';
+                ? 'Según los datos proporcionados, la predicción indica que el usuario probablemente completará una compra.'
+                : 'En función de la información proporcionada, se estima que el usuario no realizará una compra.';
             //Establecemos el texto de las probabilidades
             this.probabilityText = `📊 <strong>Probabilidades:</strong> 
               <br> ❌ No compra: ${(probabilities[0] * 100).toFixed(2)}%
@@ -158,21 +157,23 @@ export class DetallepredicionComponent implements OnInit {
       console.error('No hay datos de probabilidad para crear la gráfica');
       return;
     }
-  
+
     // Extraer probabilidades desde la variable de la clase
     const probabilities = this.prediccionData.probability;
-  
+
     if (this.chart) {
       this.chart.destroy(); // 🔥 Importante: Destruir la gráfica anterior antes de crear una nueva
     }
-  
+
     // Obtener el contexto del canvas
-    const canvas = document.getElementById('probabilityChart') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'probabilityChart'
+    ) as HTMLCanvasElement;
     if (!canvas) {
       console.error('No se encontró el elemento canvas');
       return;
     }
-  
+
     this.chart = new Chart(canvas, {
       type: 'pie',
       data: {
@@ -203,5 +204,20 @@ export class DetallepredicionComponent implements OnInit {
         },
       },
     });
-  }  
+  }
+
+  leerExplicacion() {
+    if (!this.prediccionData?.explanation) return;
+
+    window.speechSynthesis.cancel(); // Detener cualquier síntesis en curso
+
+    const speech = new SpeechSynthesisUtterance(
+      this.prediccionData.explanation
+    );
+    speech.lang = 'es-ES'; // Español
+    speech.rate = 1; // Velocidad normal
+    speech.pitch = 1; // Tono normal
+
+    window.speechSynthesis.speak(speech);
+  }
 }

@@ -19,8 +19,8 @@ export class HistorialComponent implements OnInit {
     
     'prediccion',
     'probabilidadCompra',
-    'probabilidadNoCompra',
-    'acciones',
+    'probabilidadNoCompra','fechaprediccion',
+    'detalles',
   ];
   predicciones: any[] = [];
 

@@ -1,20 +1,20 @@
 <div class="page-header">
-  <h1 class="page-title">Historial de Predicciones</h1>
+  <h1 class="page-title">Historial de Predicciones Realizadas</h1>
 </div>
 
 <div class="books-container">
   <table mat-table [dataSource]="predicciones" class="mat-elevation-z8 book-table">
 
-    <!-- 📌 ID de la Predicción -->
-    <!-- 
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-  </ng-container>-->
+    <!-- 📌 Fecha de la Predicción -->
+    
+  <ng-container matColumnDef="fechaprediccion">
+    <th mat-header-cell *matHeaderCellDef> Fecha en que se realizó la Predicción </th>
+    <td mat-cell *matCellDef="let element"> {{ element.timestamp | date:'dd/MM/yyyy HH:mm:ss' }} </td>
+  </ng-container>
 
     <!-- 🔮 Predicción (Compra / No Compra) -->
     <ng-container matColumnDef="prediccion">
-      <th mat-header-cell *matHeaderCellDef> Predicción </th>
+      <th mat-header-cell *matHeaderCellDef> Resultado de Predicción </th>
       <td mat-cell *matCellDef="let element">
         <span [ngClass]="{'compra': element.prediction === 1, 'no-compra': element.prediction === 0}">
           {{ element.prediction === 1 ? 'Compra' : 'No Compra' }}
@@ -24,7 +24,7 @@
 
     <!-- ✅ Probabilidad de Compra -->
     <ng-container matColumnDef="probabilidadCompra">
-      <th mat-header-cell *matHeaderCellDef> Probabilidad de Compra </th>
+      <th mat-header-cell *matHeaderCellDef> Posibilidad de Compra </th>
       <td mat-cell *matCellDef="let element">
         {{ (element.probability[1] * 100) | number:'1.0-2' }}%
       </td>
@@ -32,15 +32,15 @@
 
     <!-- ❌ Probabilidad de No Compra -->
     <ng-container matColumnDef="probabilidadNoCompra">
-      <th mat-header-cell *matHeaderCellDef> Probabilidad de No Compra </th>
+      <th mat-header-cell *matHeaderCellDef> Probabilidad de No Realizar Compra </th>
       <td mat-cell *matCellDef="let element">
         {{ (element.probability[0] * 100) | number:'1.0-2' }}%
       </td>
     </ng-container>
 
     <!-- ⚡ Acciones (Ver Detalles) -->
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <ng-container matColumnDef="detalles">
+      <th mat-header-cell *matHeaderCellDef> Información Detallada de la Predicción </th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="primary" (click)="verDetalle(element.id)">
           <mat-icon>book</mat-icon>

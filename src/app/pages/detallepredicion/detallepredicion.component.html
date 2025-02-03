@@ -1,99 +1,94 @@
 <div class="page-header">
-    <h1 class="page-title">Detalles de Predicción</h1>
+    <h1 class="page-title">Información Detallada de la Predicción</h1>
 </div>
 
 <div class="card-container">
-    <!-- Primer div con el mat-card de los datos de entrada -->
+    <!-- Primer card: Datos de Entrada -->
     <div class="card-item">
         <mat-card class="detalle-card">
             <mat-card-header>
-                <mat-card-title>📊 Datos de Entrada</mat-card-title>
+                <mat-card-title>📊 Datos Ingresados para la Predicción</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <div class="data-container">
-                    <div class="data-item">
-                        <strong>Páginas Administrativas:</strong> {{ prediccionData?.input_data?.Administrative }}
-                        páginas.
-                    </div>
-                    <div class="data-item">
-                        <strong>Duración Administrativa:</strong> {{ prediccionData?.input_data?.Administrative_Duration
-                        }} horas.
-                    </div>
-                    <div class="data-item">
-                        <strong>Páginas Informativas:</strong> {{ prediccionData?.input_data?.Informational }} páginas.
-                    </div>
-                    <div class="data-item">
-                        <strong>Duración Informativa:</strong> {{ prediccionData?.input_data?.Informational_Duration }}
-                        horas.
-                    </div>
-                    <div class="data-item">
-                        <strong>Páginas de Producto:</strong> {{ prediccionData?.input_data?.ProductRelated }} páginas
-                    </div>
-                    <div class="data-item">
-                        <strong>Duración Producto:</strong> {{ prediccionData?.input_data?.ProductRelated_Duration }}
-                        horas.
-                    </div>
-                    <div class="data-item">
-                        <strong>Tasa de Rebote:</strong> {{ prediccionData?.input_data?.BounceRates*100 | number:'1.0-2'
-                        }}%
-                    </div>
-                    <div class="data-item">
-                        <strong>Tasa de Salida:</strong> {{ prediccionData?.input_data?.ExitRates*100 | number:'1.0-2'
-                        }}%
-                    </div>
-                    <div class="data-item">
-                        <strong>Valor de Página:</strong> {{ prediccionData?.input_data?.PageValues | number:'1.0-2' }}%
-                    </div>
-
-                    <div class="data-item">
-                        <strong>Mes:</strong> {{ monthMap[prediccionData?.input_data?.Month] ||
-                        prediccionData?.input_data?.Month }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Tipo de Visitante:</strong> {{ visitorTypeMap[prediccionData?.input_data?.VisitorType]
-                        || 'Desconocido' }}
-                    </div>
-                    <div class="data-item">
-                        <strong>Fin de Semana:</strong> {{ prediccionData?.input_data?.Weekend ? 'Sí' : 'No' }}
-                    </div>
+                    <ng-container *ngIf="prediccionData?.input_data">
+                        <div class="data-item">
+                            <strong>Páginas relacionadas con contenido administrativo visitadas:</strong>Se Accedió a {{ prediccionData.input_data.Administrative }} páginas.
+                        </div>
+                        <div class="data-item">
+                            <strong>El total de horas dedicadas a la visita de páginas administrativas fue de:</strong> {{ prediccionData.input_data.Administrative_Duration }} horas.
+                        </div>
+                        <div class="data-item">
+                            <strong>Páginas relacionadas con contenido informativo visitadas:</strong>Se Accedió a {{ prediccionData.input_data.Informational }} páginas.
+                        </div>
+                        <div class="data-item">
+                            <strong>El total de horas dedicadas a la visita de páginas informativa fue de:</strong> {{ prediccionData.input_data.Informational_Duration }} horas.
+                        </div>
+                        <div class="data-item">
+                            <strong>Páginas relacionadas con contenido de productos visitadas:</strong>Se Accedió a {{ prediccionData.input_data.ProductRelated }} páginas.
+                        </div>
+                        <div class="data-item">
+                            <strong>El total de horas dedicadas a la visita de páginas de productos fue de:</strong> {{ prediccionData.input_data.ProductRelated_Duration }} horas.
+                        </div>
+                        <div class="data-item">
+                            <strong>Porcentaje de usuarios que abandonan la página sin interactuar:</strong> {{ prediccionData.input_data.BounceRates * 100 | number:'1.0-2' }}%
+                        </div>
+                        <div class="data-item">
+                            <strong>Porcentaje de usuarios que abandonan el sitio desde una página específica:</strong> {{ prediccionData.input_data.ExitRates * 100 | number:'1.0-2' }}%
+                        </div>
+                        <div class="data-item">
+                            <strong>Valoración promedio de cada página:</strong> {{ prediccionData.input_data.PageValues | number:'1.0-2' }}%
+                        </div>
+                        <div class="data-item">
+                            <strong>Mes del año se experimenta la mayor cantidad de visitas:</strong> {{ monthMap[prediccionData.input_data.Month] || prediccionData.input_data.Month }}
+                        </div>
+                        <div class="data-item">
+                            <strong>Tipo de visitante que describe mejor a los usuarios:</strong> {{ visitorTypeMap[prediccionData.input_data.VisitorType] || 'Desconocido' }}
+                        </div>
+                        <div class="data-item">
+                            <strong>Las compras en su sitio web son más frecuentes durante los fines de semana:</strong> {{ prediccionData.input_data.Weekend ? 'Sí' : 'No' }}
+                        </div>
+                    </ng-container>
                 </div>
             </mat-card-content>
         </mat-card>
     </div>
 
-    <!-- Segundo div con el mat-card para la gráfica -->
+    <!-- Segundo card: Gráfica de Datos -->
     <div class="card-item">
         <mat-card class="detalle-card">
             <mat-card-header>
-                <mat-card-title>📊 Gráfica de Datos</mat-card-title>
+                <mat-card-title>📊 Gráfica de Porcentajes de Compra y No Compra</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <div class="chart-container">
-                    <!-- Aquí colocarías el código para la gráfica -->
-                    <div class="data-item" *ngIf="!loading">
-                        <strong>Predicción:</strong> {{ predictionText }}
-                    </div>
-                    <button mat-raised-button color="primary" (click)="createChart()">Grafica</button>
-                    <div class="data-item" *ngIf="!loading">
-                        <strong>Probabilidades:</strong>
-                        <canvas id="probabilityChart"></canvas> <!-- Aquí se muestra la gráfica de pastel -->
-                    </div>
-
-                    <!-- Muestra un mensaje mientras se cargan los datos -->
+                    <ng-container *ngIf="!loading">
+                        <div class="data-item">
+                            <strong>Predicción:</strong> {{ predictionText }}
+                        </div>
+                        <button mat-raised-button color="primary" (click)="createChart()">Generar Gráfica de Resultados</button>
+                        <div class="data-item">
+                            <strong>Probabilidades:</strong>
+                            <canvas id="probabilityChart"></canvas> <!-- Aquí se muestra la gráfica -->
+                        </div>
+                    </ng-container>
                     <div *ngIf="loading">Cargando...</div>
-
                 </div>
             </mat-card-content>
         </mat-card>
     </div>
 
-    <div class="card-item">
+    <!-- Tercer card: Explicación de la Predicción -->
+    <div class="card-item" *ngIf="prediccionData?.explanation">
         <mat-card class="detalle-card">
             <mat-card-header>
                 <mat-card-title>📊 Explicación de la predicción</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <!-- Contenido del segundo mat-card -->
+                <p class="explanation-text">{{ prediccionData.explanation }}</p>
+                <button mat-raised-button color="primary" (click)="leerExplicacion()">
+                    🔊 Escuchar explicación
+                </button>
             </mat-card-content>
         </mat-card>
     </div>

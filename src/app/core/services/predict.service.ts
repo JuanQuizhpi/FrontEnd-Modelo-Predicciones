@@ -12,11 +12,11 @@ export class PredictService {
 
   //private apiHistorial = 'http://127.0.0.1:5000';
 
-  private apiUrl = 'https://backdesplieguerender.onrender.com/predict';
+  private apiUrl = 'https://backdesplieguerenderia.onrender.com/predict';
 
-  private apiUrlPredId = 'https://backdesplieguerender.onrender.com/history/';
+  private apiUrlPredId = 'https://backdesplieguerenderia.onrender.com/history/';
 
-  private apiHistorial = 'https://backdesplieguerender.onrender.com';
+  private apiHistorial = 'https://backdesplieguerenderia.onrender.com';
 
 
   constructor(private http: HttpClient) {}

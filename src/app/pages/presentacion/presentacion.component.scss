@@ -1,0 +1,45 @@
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 850px; /* Ajusta la altura según necesites */
+    background-image: url('/assets/FondoApp.png'); /* Ruta de la imagen */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    text-align: center;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    background: rgba(0, 0, 0, 0.4); /* Oscurece el fondo para resaltar el texto */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .cta-button {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .cta-button:hover {
+    background-color: #ddd;
+  }
+  

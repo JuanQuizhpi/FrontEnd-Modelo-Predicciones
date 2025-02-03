@@ -225,8 +225,8 @@ export class PrediccionComponent {
         this.loading = false;
         const predictionText =
           response.prediction === 1
-            ? 'El usuario probablemente realizará una compra.'
-            : 'El usuario probablemente no realizará una compra.';
+            ? 'Según los datos proporcionados, la predicción indica que el usuario probablemente completará una compra.'
+            : 'En función de la información proporcionada, se estima que el usuario no realizará una compra.';
 
         const probabilityText = `📊 <strong>Probabilidades:</strong> 
       <br> ❌ No compra: ${(response.probability[0] * 100).toFixed(2)}%
